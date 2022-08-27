@@ -1,0 +1,13 @@
+backend:
+Create an account with username and Password
+Login/Logout;
+Need Withdrawal Route
+Need Deposit Route
+Show a screenshot of the Database
+
+ADDITIONAL FUNCTIONALITY IDEAS:
+users/employees? i don't think this one has any point
+Money transfer between users I like this
+Account types, checking and saving, I like this
+Profile Updates that are persistent WTF kind of profiles could bank users have
+Deposit by photo of checks
