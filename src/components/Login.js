@@ -1,10 +1,9 @@
-import "./Login.css";
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import './Login.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-const Login = ({ setUserBalance, setCurrentUser }) => {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [userCreated, setUserCreated] = useState(false);
+const Login = ({setLoggedIn, setUserBalance, setCurrentUser, setName}) => {
+  const [form, setForm] = useState({ email: '', password: '' });
   const [loggingIn, setLoggingIn] = useState(true);
   const [userLogged, setUserLogged] = useState(false);
   const navigate = useNavigate();
@@ -18,32 +17,18 @@ const Login = ({ setUserBalance, setCurrentUser }) => {
     e.preventDefault();
     if (loggingIn) {
       const newPerson = { ...form };
-      console.log(newPerson);
       const response = await fetch(
         `http://localhost:5000/login/${newPerson.email}/${newPerson.password}`
       );
       const user = await response.json();
-      console.log(user);
       if (user === null) {
-        console.log("user not found or password was incorrect");
+        console.log('user not found or password was incorrect');
       }
+      setLoggedIn(true);
       setCurrentUser(user.email);
-      setUserBalance(user.balance);
+      setName(user.name);
       setUserLogged(true);
-      navigate("/");
-    } else {
-      const newPerson = { ...form };
-      await fetch(`http://localhost:5000/createUser`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPerson),
-      }).catch((error) => {
-        return;
-      });
-      setUserCreated(true);
-      setForm({ email: "", password: "" });
-      setLoggingIn(true);
-      navigate("/");
+      navigate('/');
     }
   }
 
@@ -70,15 +55,6 @@ const Login = ({ setUserBalance, setCurrentUser }) => {
             </form>
             <div className="success">
               {!userLogged ? <></> : <>{`Welcome ${form.email}`}</>}
-            </div>
-            <div
-              className="createAccount flex-cent"
-              onClick={(e) => {
-                e.preventDefault();
-                setLoggingIn(!loggingIn);
-              }}
-            >
-              {loggingIn ? "Open An Account." : "Login."}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const db = "";
+const db = "mongodb+srv://wdoatAdmin:3WORSTdudeOFall3@cluster0.bexppic.mongodb.net/?retryWrites=true&w=majority";
 
 const client = new MongoClient(db, {
   useNewUrlParser: true,

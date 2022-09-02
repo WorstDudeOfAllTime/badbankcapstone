@@ -14,10 +14,21 @@
   justify-content: center;
   align-items: center;
 }
+.content-box {
+  height: 100%;
+  width: 100vw;
+  background-image: url("https://images.unsplash.com/photo-1602014206066-0ff9702c4a6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .flex-cent-col {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.nav-section{
+  width: 85%;
 }
 .logo-display {
   width: 85%;

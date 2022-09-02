@@ -9,18 +9,13 @@
   align-items: center;
   flex-direction: column;
 }
-.content-box {
-  background-image: url("https://images.unsplash.com/photo-1602014206066-0ff9702c4a6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .login-container {
   position: relative;
   height: 100%;
   width: 100%;
   animation-name: fadeIn;
   animation-duration: 2s;
+  font-family: 'Oswald', sans-serif;
 }
 .login-content {
   height: 100%;
@@ -29,7 +24,7 @@
 .login-form {
   height: 100%;
   width: 40%;
-  background: black;
+  background: rgba(0,0,0,.75);
 }
 .form-box {
   height: 70%;
@@ -46,7 +41,7 @@ form h2 {
   width: 100%;
   text-align: left;
   line-height: 0;
-  font-size: 40px;
+  font-size: 32px;
 }
 input {
   width: 100%;
@@ -76,21 +71,6 @@ button:hover {
 }
 .success {
   color: white;
-}
-.createAccount {
-  position: absolute;
-  background: white;
-  height: 75px;
-  width: 225px;
-  right: -100px;
-  top: 40px;
-  border-radius: 4px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-weight: bold;
-  font-size: 22px;
-}
-.createAccount:hover {
-  cursor: pointer;
 }
 @keyframes fadeIn {
   from {
