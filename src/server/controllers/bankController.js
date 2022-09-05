@@ -1,59 +1,38 @@
 const dbo = require('./../db/conn');
+const {faker} = require('@faker-js/faker')
 
-exports.getBalance = async (req, res) => {
+exports.getBalance = async (req, res) => {;
   let db_connect = dbo.getDb();
   const accountArray = []
-  const savingsArray = []
   const collection = db_connect.collection('transactions');
-  const savingsList = [
+  const transactionList = [
     {
       $match: {
-        type: 'savings'
+        type: `${req.params.type}`
       }
     }  
   ]
-  const pipeline = [
-    {
-      $match: {
-        type: 'checking'
-      }
-    }, {
-      $group: {
-        _id: 'checkingBalance', 
-        checkingBalance: {
-          $sum: '$amount'
-        }
-      }
-    }
-  ];
-  const pipelineTwo = [
-    {
-      $match: {
-        type: 'savings'
-      }
-    }, {
-      $group: {
-        _id: 'savingsBalance', 
-        savingsBalance: {
-          $sum: '$amount'
-        }
-      }
-    }
-  ];
-  const aggCursor = collection.aggregate(pipeline);
+  const aggCursor = collection.aggregate(transactionList);
   for await (const doc of aggCursor) {
     accountArray.push(doc)
   }
-  const aggCursorTwo = collection.aggregate(pipelineTwo);
-  for await (const doc of aggCursorTwo) {
-    accountArray.push(doc)
-  }
-  const aggCursorThree = collection.aggregate(savingsList);
-  for await(const doc of aggCursorThree){
-    savingsArray.push(doc);
-  }
 
-  res.send(savingsArray);
+  res.send(accountArray);
+}
+
+exports.depositFunds = (req, res) => {
+  let db_connect = dbo.getDb();
+  let deposit = {user: req.body.user, type: req.body.type, amount: Math.abs(req.body.amount), date: new Date()}
+  db_connect.collection('transactions').insert(deposit, (id, result) => {
+    res.end();
+  })
+}
+exports.withdrawFunds = (req, res) => {
+  let db_connect = dbo.getDb();
+  let withdraw = {user: req.body.user, type: req.body.type, amount: -Math.abs(req.body.amount), date: new Date()}
+  db_connect.collection('transactions').insert(withdraw, (id, result) => {
+    res.end();
+  })
 }
 
 exports.findAccount = (req, res) => {
